@@ -13,3 +13,14 @@
   - module
   - service test
   - service
+- Updates app.module.ts with the created module
+
+## Controller generator
+
+`nest g controller [name]`
+
+- Quickly create only a controller
+- Creates
+  - controller test
+  - controller (bare bones)
+- Updateds app.module.ts with the created controller
