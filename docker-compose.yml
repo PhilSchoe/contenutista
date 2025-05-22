@@ -1,0 +1,30 @@
+version: "3.9"
+services:
+  contenutista-db:
+    image: postgres
+    restart: always
+    container_name: contenutista-db
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_PASSWORD: example
+    volumes:
+      - contenutista_pgdata:/var/lib/postgresql/data
+
+  contenutista-objectstore:
+    image: quay.io/minio/minio:latest
+    command: minio server --console-address ":9001" /data
+    restart: always
+    container_name: contenutista-objectstore
+    ports:
+      - 9000:9000
+      - 9001:9001
+    environment:
+      MINIO_ROOT_USER: ${MINIO_ACCESS_KEY}
+      MINIO_ROOT_PASSWORD: ${MINIO_SECRET_KEY}
+    volumes:
+      - contenutista_miniodata:/data
+
+volumes:
+  contenutista_pgdata:
+  contenutista_miniodata:
