@@ -1,3 +1,10 @@
+# Next Steps
+
+- users.controller.spec.ts probably contains Ai created non-sense --> it only checks that mocked data is returned. Make it meaningful.
+- Wrap prisma service into a module to make it usable in users module
+
+---
+
 <p align="center">
   <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
 </p>
