@@ -1,11 +1,11 @@
 import { Test, TestingModule } from "@nestjs/testing";
 import { UsersService } from "./users.service";
-import { PrismaUserRepository } from "./prisma-user.repository";
-import { USERS_REPOSITORY } from "./users.constants";
-import { PrismaModule } from "../db/prisma.module";
-import { UserEntity } from "./entities/user.entity";
-import { UserRepository } from "./users.repository";
-import { CreateUserDto } from "./dto/create-user.dto";
+import { PrismaUserRepository } from "../repository/prisma-user.repository";
+import { USERS_REPOSITORY } from "../users.constants";
+import { PrismaModule } from "../../db/prisma.module";
+import { UserEntity } from "../entities/user.entity";
+import { UserRepository } from "../repository/users.repository";
+import { CreateUserDto } from "../dto/create-user.dto";
 
 describe("UsersService", () => {
   let service: UsersService;
