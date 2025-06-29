@@ -1,7 +1,7 @@
 # Next Steps
 
-- users.controller.spec.ts probably contains Ai created non-sense --> it only checks that mocked data is returned. Make it meaningful.
-- Wrap prisma service into a module to make it usable in users module
+- Add MinIO
+- E2E test for create User?
 
 ---
 

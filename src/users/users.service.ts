@@ -11,7 +11,7 @@ export class UsersService {
   ) {}
 
   create(createUserDto: CreateUserDto) {
-    return this.usersRepository.create(createUserDto.email, createUserDto.name);
+    return this.usersRepository.create(createUserDto.name, createUserDto.email);
   }
 
   findAll() {

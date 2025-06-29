@@ -12,12 +12,10 @@ describe("UsersController", () => {
     id: 1,
     email: "test@example.com",
     name: "Test User",
-    // ...add other properties if needed...
   };
 
   const mockUsersService = {
     create: jest.fn().mockResolvedValue(mockUser),
-    // ...other methods can be mocked as needed...
   };
 
   beforeEach(async () => {
@@ -40,12 +38,15 @@ describe("UsersController", () => {
   });
 
   it("should save a user to the database", async () => {
+    // Given
     const dto: CreateUserDto = { email: "test@example.com", name: "Test User" };
+
+    // When
     const result = await controller.create(dto);
 
-    console.log(result);
-
+    // Then
     expect(usersService.create).toHaveBeenCalledWith(dto);
+    expect(usersService.create).toHaveBeenCalledTimes(1);
     expect(result).toEqual(mockUser);
   });
 });
