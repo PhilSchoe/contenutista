@@ -1,6 +1,7 @@
 import { Injectable, OnModuleInit } from "@nestjs/common";
 import * as Minio from "minio";
 import { ConfigService } from "@nestjs/config";
+import { nanoid } from "nanoid";
 
 @Injectable()
 export class MinioService implements OnModuleInit {
@@ -42,7 +43,10 @@ export class MinioService implements OnModuleInit {
   async getPutObjectUrl(
     objectName: string,
     bucketName: string = this.configService.getOrThrow("MINIO_DEFAULT_BUCKET"),
-  ): Promise<string> {
-    return this.client.presignedPutObject(bucketName, objectName);
+  ): Promise<{ url: string; objectStoreId: string }> {
+    const objectStoreId = `${objectName}-${nanoid()}`;
+    const url = await this.client.presignedPutObject(bucketName, objectStoreId);
+
+    return { url, objectStoreId };
   }
 }
