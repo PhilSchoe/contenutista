@@ -1,4 +1,8 @@
-import { Injectable, OnModuleInit } from "@nestjs/common";
+import {
+  Injectable,
+  InternalServerErrorException,
+  OnModuleInit,
+} from "@nestjs/common";
 import * as Minio from "minio";
 import { ConfigService } from "@nestjs/config";
 import { nanoid } from "nanoid";
@@ -44,9 +48,20 @@ export class MinioService implements OnModuleInit {
     objectName: string,
     bucketName: string = this.configService.getOrThrow("MINIO_DEFAULT_BUCKET"),
   ): Promise<{ url: string; objectStoreId: string }> {
-    const objectStoreId = `${objectName}-${nanoid()}`;
-    const url = await this.client.presignedPutObject(bucketName, objectStoreId);
-
-    return { url, objectStoreId };
+    try {
+      const objectStoreId = `${objectName}-${nanoid()}`;
+      const url = await this.client.presignedPutObject(
+        bucketName,
+        objectStoreId,
+      );
+      return { url, objectStoreId };
+    } catch (error) {
+      console.error(
+        `Error generating URL for ${objectName}. Error details: ${error.message}`,
+      );
+      throw new InternalServerErrorException(
+        `Error generating URL for ${objectName}. Error details: ${error.message}`,
+      );
+    }
   }
 }
