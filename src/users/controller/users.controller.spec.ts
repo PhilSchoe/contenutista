@@ -6,7 +6,6 @@ import { UserEntity } from "../entities/user.entity";
 
 describe("UsersController", () => {
   let controller: UsersController;
-  let usersService: UsersService;
 
   const mockUser: UserEntity = {
     id: 1,
@@ -30,7 +29,6 @@ describe("UsersController", () => {
     }).compile();
 
     controller = module.get<UsersController>(UsersController);
-    usersService = module.get<UsersService>(UsersService);
   });
 
   it("should be defined", () => {
@@ -45,8 +43,8 @@ describe("UsersController", () => {
     const result = await controller.create(dto);
 
     // Then
-    expect(usersService.create).toHaveBeenCalledWith(dto);
-    expect(usersService.create).toHaveBeenCalledTimes(1);
+    expect(mockUsersService.create).toHaveBeenCalledWith(dto);
+    expect(mockUsersService.create).toHaveBeenCalledTimes(1);
     expect(result).toEqual(mockUser);
   });
 });
